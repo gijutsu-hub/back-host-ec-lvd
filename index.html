@@ -10,15 +10,13 @@
     <meta name="keywords" content="cloud strategy, network architecture, linux engineering, cybersecurity consulting, managed IT, cloud migration, SD-WAN, IaC, NextBytelabs" />
     <meta name="author" content="NextBytelabs" />
     <meta name="theme-color" content="#0b0b0d" />
-
-    <!-- Canonical & Robots -->
-    <link rel="canonical" href="https://www.nextbytelabs.example/" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-    <!-- Hreflang (example) -->
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.nextbytelabs.com/" />
+
+    <!-- Language / alternate (example) -->
     <link rel="alternate" href="https://www.nextbytelabs.example/" hreflang="en" />
-    <!-- Add other languages if applicable:
-         <link rel="alternate" href="https://www.nextbytelabs.example/fr/" hreflang="fr" /> -->
 
     <!-- Social / Open Graph -->
     <meta property="og:site_name" content="NextBytelabs" />
@@ -28,6 +26,7 @@
     <meta property="og:url" content="https://www.nextbytelabs.example/" />
     <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/MPoncxLLjtSIS0ljGSqkqtDcIQb2/social-images/social-1757798037788-lvd.png" />
     <meta property="og:image:alt" content="NextBytelabs — Trusted consulting partners" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -36,25 +35,46 @@
     <meta name="twitter:description" content="Trusted consulting for cloud strategy, network & Linux engineering, cybersecurity, and managed services." />
     <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/MPoncxLLjtSIS0ljGSqkqtDcIQb2/social-images/social-1757798037788-lvd.png" />
 
-    <!-- Favicons / Touch icons -->
-    <link rel="icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/MPoncxLLjtSIS0ljGSqkqtDcIQb2/uploads/1757798034752-ec-main.png" type="image/png" />
+    <!-- Small icons: inline SVG favicon with NB (fast) -->
+    <!-- This avoids an HTTP request and ensures a crisp vector favicon in supporting browsers -->
+    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230b0b0d' width='100' height='100'/><text x='50' y='62' font-size='56' font-family='Inter,Arial,Helvetica,sans-serif' fill='%23ffffff' text-anchor='middle' font-weight='700'>NB</text></svg>" type="image/svg+xml" />
+    <!-- Fallback PNG (optional): still keep your PNG as a fallback for older UAs -->
+    <link rel="alternate icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/MPoncxLLjtSIS0ljGSqkqtDcIQb2/uploads/1757798034752-ec-main.png" />
+
+    <!-- Apple touch -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Preconnect & performance hints -->
+    <!-- Performance: resource hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Preload core fonts you control -->
+
+    <!-- Preload fonts you control -->
     <link rel="preload" href="/fonts/AirIndia/AirIndiaVariable.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="/fonts/AirIndia/airindia-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Google Fonts (kept for UI) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Module preload for SPA entry (helps module fetch priority) -->
+    <link rel="modulepreload" href="/src/main.tsx">
 
-    <!-- Important static CSS (if you have critical CSS, preload it) -->
-    <!-- <link rel="preload" href="/critical.css" as="style"> -->
-    <!-- <link rel="stylesheet" href="/main.css"> -->
+    <!-- Google Fonts (kept for UI) — loading fonts with display=swap to avoid FOIT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Structured data (Organization + WebSite + SearchAction) -->
+    <!-- Critical inline CSS (very small) to reduce FOIT and avoid CLS before main CSS loads -->
+    <style>
+      /* Minimal critical styles: set background, base font stack and prefers-reduced-motion */
+      :root { color-scheme: light dark; }
+      html,body{height:100%;margin:0;background:#ffffff;color:#111;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+      #root {min-height:100vh; display:block;}
+      @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms!important;transition-duration:0.001ms!important;}}
+    </style>
+
+    <!-- Important static CSS (deferred by default) - keep but mark as non-blocking -->
+    <!-- If you have critical CSS, inline it above. Otherwise load main CSS with rel=preload + onload trick to avoid render-blocking. -->
+    <link rel="preload" href="/main.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/main.css"></noscript>
+
+    <!-- Structured data (Organization + WebSite + SearchAction + Breadcrumb) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -90,17 +110,25 @@
             "target": "https://www.nextbytelabs.example/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://www.nextbytelabs.example/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.nextbytelabs.example/"
+            }
+          ]
         }
       ]
     }
     </script>
 
-    <!-- Optional: sitemap, robots.txt references -->
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
-    <!-- If you use an indexable service worker / PWA, add manifest -->
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
-
-    <!-- Keep SPA entrypoint -->
+    <!-- Prefers-reduced-motion & viewport hint already set above -->
+    <!-- Keep SPA entrypoint script as module and defer parsing -->
     <script type="module" defer src="/src/main.tsx"></script>
   </head>
 
@@ -118,8 +146,18 @@
     <div id="root" aria-hidden="false"></div>
 
     <!-- Optional small inline script to add early meta for analytics or A/B -->
-    <!-- <script>window.appStart = Date.now();</script> -->
+    <!-- Use deferred analytics and load after user interaction or on idle to avoid blocking. -->
+    <script>
+      // Example: schedule analytics/load non-critical scripts on idle (if supported)
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          // load analytics or other non-critical scripts here
+        }, {timeout:2000});
+      } else {
+        setTimeout(() => { /* load non-critical scripts */ }, 2000);
+      }
+    </script>
 
-    <!-- If you have any non-critical scripts, load them with `defer` or `async` -->
+    <!-- If you have any non-critical scripts, load them with `defer` or `async` as modules where possible -->
   </body>
 </html>
