@@ -4,7 +4,7 @@ const Contact = () => {
   const contactInfo = [{
     icon: Mail,
     title: "Reach out to us",
-    content: "business@netbytelab.com",
+    content: "business@in.netbytelab.com",
     description: "We'll get back to you superfast"
   }, {
     icon: MapPin,

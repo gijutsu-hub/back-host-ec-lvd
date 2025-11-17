@@ -119,7 +119,7 @@ const Careers = () => {
                       <p className="font-semibold text-consulting-dark mb-2">Application Requirements:</p>
                       <p className="mb-2">Please include a concise resume or LinkedIn link</p>
                       <p className="mb-2">Provide a brief technical sales pitch (1 minute max) — either a short video or a written 2–3 paragraph pitch describing how you'd position our offering to a target customer</p>
-                      <p className="mb-2">Email the materials to: <span className="font-semibold">careers@netbytelabs.com</span></p>
+                      <p className="mb-2">Email the materials to: <span className="font-semibold">careers@in.netbytelab.com</span></p>
                     </div>
                   </div>
                 </div>
@@ -170,7 +170,7 @@ const Careers = () => {
           {!showSuccess ? (
             <>
               <a
-                href="mailto:careers@netbytelabs.com"
+                href="mailto:careers@in.netbytelab.com"
                 className="inline-block"
                 onClick={() => setShowSuccess(true)}
               >
@@ -185,10 +185,10 @@ const Careers = () => {
               <p className="text-consulting-medium text-base sm:text-lg">
                 In case the button doesn't work:<br />
                 <a
-                  href="mailto:careers@netbytelabs.com"
+                  href="mailto:careers@in.netbytelab.com"
                   className="font-semibold text-consulting-dark hover:text-consulting-medium transition-colors duration-300 hover-glow"
                 >
-                  careers@netbytelabs.com
+                  careers@in.netbytelab.com
                 </a>
               </p>
             </>
@@ -218,10 +218,10 @@ const Careers = () => {
                 <p className="text-consulting-medium text-sm sm:text-base">
                   Here's the mail ID:{" "}
                   <a
-                    href="mailto:careers@netbytelabs.com"
+                    href="mailto:careers@in.netbytelab.com"
                     className="font-semibold text-consulting-dark hover:text-consulting-medium transition-colors duration-300 hover-glow"
                   >
-                    careers@netbytelabs.com
+                    careers@in.netbytelab.com
                   </a>
                 </p>
               </div>
